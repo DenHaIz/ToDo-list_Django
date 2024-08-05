@@ -1,0 +1,17 @@
+<!-- Страница для изменения задач пользователей -->
+
+{% extends 'main/layout.html' %}
+
+{% block title %} Изменение задачи {% endblock %}
+
+{% block content %}
+
+<h3>Изменение задачи</h3>
+<a href="{% url 'tasks' %}">Все задачи</a>
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Подтвердить">
+</form>
+
+{% endblock %}

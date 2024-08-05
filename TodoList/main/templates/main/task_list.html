@@ -1,0 +1,46 @@
+<!-- Главная страница со всеми записями пользователей и возможностью их редактирования -->
+
+{% extends 'main/layout.html' %}
+
+{% block title %} Список задач {% endblock %}
+
+
+{% block content %}
+
+<!-- Проверка пользователя на наличие аккаунта -->
+
+{% if request.user.is_authenticated %}
+    <p>Пользователь: {{request.user}}</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Выход из аккаунта</button>
+    </form>
+{% else %}
+<a href="{% url 'login' %}">Войти в аккаунт</a>
+{% endif %}
+
+<h1>Мой список задач {{color}}</h1>
+<a href="{% url 'task-create' %}">Добавить задачу</a>
+
+<!-- Таблица со всеми задачами пользователя -->
+
+<table>
+    <tr>
+        <th><h2>Задачи</h2></th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>
+        <td><a href="{% url 'task' task.id %}">Посмотреть</a></td>
+        <td><a href="{% url 'task-update' task.id %}">Изменить</a></td>
+        <td><a href="{% url 'task-assign' task.id %}">Выдать права другому пользователю</a></td>
+        <td><a href="{% url 'task-revoke' task.id %}">Отозвать права доступа</a></td>
+        <td><a href="{% url 'task-delete' task.id %}">Удалить</a></td>
+    </tr>
+    {% empty %}
+        <h3>Нет вещей в списке</h3>
+    {% endfor %}
+</table>
+{% endblock %}

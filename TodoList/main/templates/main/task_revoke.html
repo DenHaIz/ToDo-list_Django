@@ -1,0 +1,15 @@
+<!-- Страница отзыва прав доступ-->
+
+{% extends 'main/layout.html' %}
+
+{% block title %} Вход {% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <p>Вы действительно хотите убрать доступ к этой задаче у других пользователей?</p>
+    <button type="submit">Подтвердить</button>
+  </form>
+
+  {% endblock %}

@@ -1,0 +1,12 @@
+<!-- Страница для просмотра конкретной задачи пользователя -->
+
+{% extends 'main/layout.html' %}
+
+{% block title %} Просмотр задачи {% endblock %}
+
+{% block content %}
+
+<a href="{% url 'tasks' %}">Все задачи</a>
+<h1>Задача: {{task}}</h1>
+
+{% endblock %}
